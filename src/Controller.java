@@ -21,9 +21,4 @@ public class Controller {
 			view.update(model.getX(), model.getY(), model.getDirect());
 		}
 	}
-	
-	public static void main(String[] args){
-		Controller c = new Controller();
-		c.start();
-	}
 }

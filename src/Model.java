@@ -11,31 +11,43 @@ import java.awt.image.BufferedImage;
  * provide location
  **/
 public class Model{
-	Direction direct;
-	private int xloc = 0;
-	private int yloc = 0;
-	private final int xIncr = 8;
-    private final int yIncr = 2;
-    private int xMult = 1;
+	Direction direct; //direction(enum)
+	private int xloc = 0; //xlocation 
+	private int yloc = 0; //y location 
+	private final int xIncr = 8;//x increment
+    private final int yIncr = 2;//y increment
+    private int xMult = 1; //xMult and yMult are essentially another representation of the direction
+    					   //they are unneccessary, could just be checking our direction and extrapolating these, its 
+    					   //just easier this way.
     private int yMult = 1;
-	private int frameWidth;
-	private int frameHeight;
-	private int imgWidth;
-	private int imgHeight;
+	private int frameWidth; //pixel width of the screen
+	private int frameHeight; // pixel height of the screen
+	private int imgWidth;//pixel width of the image
+	private int imgHeight; // pixel height of the image
 	
+	
+	/*
+	 * constructor for our model, takes in data that will come from our view.
+	 */
 	public Model(int width, int height, int imgWidth, int imgHeight){
 		frameWidth=width;
 		frameHeight=height;
 		this.imgWidth = imgWidth;
 		this.imgHeight = imgHeight;
 	}
+	
+	
 	public int getX(){
 		return xloc;
 	}
 	public int getY(){
 		return yloc;
 	}
-
+	/*
+	 * xMult and yMult make this trivial.
+	 * changes the direction based on the boundaries of the screen, and 
+	 * changes the location based on the current direction.
+	 */
 	public void updateLocationAndDirection(){
 		if(xloc>=(frameWidth-imgWidth)){
 			xMult=-1;
@@ -54,6 +66,9 @@ public class Model{
 		yloc+=yIncr*yMult;
 		
 	}
+	/*
+	 * modifies the direction based on the xMult and yMult.
+	 */
 	public void updateDirection(){
 		if(xMult == 1 && yMult == 1){
 			direct=Direction.SOUTHEAST;
@@ -65,7 +80,9 @@ public class Model{
     		direct = Direction.NORTHWEST;
     	}
 	}
-
+	
+	
+	//getters BELOW.
 	public Direction getDirect() {
 		return direct;
 	}
